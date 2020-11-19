@@ -445,7 +445,11 @@ there.
 @media (min-width: 1200px) {}
 
 
-/*  Plotly  */
+/*  Plotly and Dash  */
 .svg-container.user-select-none {
   box-shadow: 10px 10px 10px 0px #101010;
+}
+
+.dash-dropdown {
+    color: rgb(50, 50, 50)
 }
