@@ -256,7 +256,13 @@ app.layout = html.Div(
         html.Br(style={'clear':'both'}),
         
         html.H3('Trends in Income versus Job Prestige by gender'),
-        dcc.Graph(figure=fig4),
+        dcc.Graph(figure=fig4,
+        style={
+            "display": "block",
+            "margin-left": "auto",
+            "margin-right": "auto",
+            }),
+        
         html.Div([
             html.H3('Job Prestige distribution by gender'),
             dcc.Graph(figure=fig5a)
