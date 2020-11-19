@@ -218,7 +218,7 @@ questions = {
     'men_overwork': 'Family life often suffers because men concentrate too much on their work.'
 }
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 server = app.server
 
