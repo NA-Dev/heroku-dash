@@ -15,7 +15,6 @@
 
 import numpy as np
 import pandas as pd
-from IPython import get_ipython
 import plotly.graph_objects as go
 import plotly.express as px
 import plotly.graph_objects as go
@@ -32,7 +31,9 @@ external_stylesheets = ['./style.css']
 # In[2]:
 
 
-get_ipython().run_cell_magic('capture', '', 'gss = pd.read_csv("https://github.com/jkropko/DS-6001/raw/master/localdata/gss2018.csv",\n                 encoding=\'cp1252\', na_values=[\'IAP\',\'IAP,DK,NA,uncodeable\', \'NOT SURE\',\n                                               \'DK\', \'IAP, DK, NA, uncodeable\', \'.a\', "CAN\'T CHOOSE"])')
+gss = pd.read_csv("https://github.com/jkropko/DS-6001/raw/master/localdata/gss2018.csv",
+                 encoding='cp1252', na_values=['IAP','IAP,DK,NA,uncodeable', 'NOT SURE',
+                                               'DK', 'IAP, DK, NA, uncodeable', '.a', "CAN'T CHOOSE"])
 
 
 # Here is code that cleans the data and gets it ready to be used for data visualizations:
