@@ -281,7 +281,7 @@ app.layout = html.Div(
             "display": "block",
             "margin-left": "auto",
             "margin-right": "auto",
-            }))
+            })
     ]
 )
 @app.callback(
