@@ -20,7 +20,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.figure_factory as ff
 import dash
-from jupyter_dash import JupyterDash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
@@ -217,7 +216,7 @@ questions = {
     'men_overwork': 'Family life often suffers because men concentrate too much on their work.'
 }
 
-app = JupyterDash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(
     [
