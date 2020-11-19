@@ -276,7 +276,12 @@ app.layout = html.Div(
         html.Br(style={'clear':'both'}),
         
         html.H3('Income distributions by job prestige and gender'),
-        dcc.Graph(figure=fig6)
+        dcc.Graph(figure=fig6,
+        style={
+            "display": "block",
+            "margin-left": "auto",
+            "margin-right": "auto",
+            }))
     ]
 )
 @app.callback(
