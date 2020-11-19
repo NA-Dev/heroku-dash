@@ -143,7 +143,7 @@ gss_data['sex'] = gss_data['sex'].map({'female': 'Female',
 fig4 = px.scatter(gss_data, x='job_prestige', y='income', 
                  color = 'sex', 
                  trendline='ols',
-#                  height=600, width=600,
+                 height=700,
                  labels={'job_prestige':'Job Prestige', 
                         'income':'Income',
                         'sex': 'Gender'},
@@ -192,7 +192,7 @@ fig6 = px.box(gss_sub, x='sex', y='income', color='sex',
              facet_col='job_prestige_groups', facet_col_wrap=2,
             labels={'sex':'Gender', 'income':'Income'},
             color_discrete_map = {'Male':'blue', 'Female':'red'},
-#             width=1000, height=900
+            height=900
              )
 
 fig6.update(layout=dict(title=dict(x=0.5)))
@@ -216,7 +216,7 @@ graphstyle = {
             'margin-left':'auto',
             'margin-right':'auto', 
             'text-align':'center',
-            'max-width': '700px'
+            'max-width': '1000px'
             }
 
 questions = {
