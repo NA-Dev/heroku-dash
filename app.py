@@ -143,7 +143,7 @@ gss_data['sex'] = gss_data['sex'].map({'female': 'Female',
 fig4 = px.scatter(gss_data, x='job_prestige', y='income', 
                  color = 'sex', 
                  trendline='ols',
-                 height=600, width=600,
+#                  height=600, width=600,
                  labels={'job_prestige':'Job Prestige', 
                         'income':'Income',
                         'sex': 'Gender'},
@@ -192,7 +192,8 @@ fig6 = px.box(gss_sub, x='sex', y='income', color='sex',
              facet_col='job_prestige_groups', facet_col_wrap=2,
             labels={'sex':'Gender', 'income':'Income'},
             color_discrete_map = {'Male':'blue', 'Female':'red'},
-            width=1000, height=900)
+#             width=1000, height=900
+             )
 
 fig6.update(layout=dict(title=dict(x=0.5)))
 fig6.update_layout(showlegend=True)
@@ -210,6 +211,13 @@ fig6.for_each_annotation(lambda a: a.update(text=a.text.replace("job_prestige_gr
 
 # In[57]:
 
+graphstyle = {
+            'margin-bottom':'50px', 
+            'margin-left':'auto',
+            'margin-right':'auto', 
+            'text-align':'center',
+            'max-width': '700px'
+            }
 
 questions = {
     'satjob': 'On the whole, how satisfied are you with the work you do?',
@@ -229,7 +237,9 @@ app.layout = html.Div(
         html.H1('Understanding the Gender Wage Gap'),
         dcc.Markdown(children = markdown_text),
         html.H3('Comparing mean income, occupational prestige, and socioeconomic index by gender'),
-        dcc.Graph(figure=fig2),
+        html.Div([
+            dcc.Graph(figure=fig2)
+        ], style=graphstyle),
         html.H3('Degree of agreement with gender role statements'),
         
         # user inputs
@@ -252,38 +262,38 @@ app.layout = html.Div(
         
         html.Div([
             html.H5(id='fig3title'),
-            dcc.Graph(id='fig3')
+            html.Div([
+                dcc.Graph(id='fig3')
+            ], style=graphstyle),
         ], style={'width': '65%', 'float': 'right'}),
         
         html.Br(style={'clear':'both'}),
         
         html.H3('Trends in Income versus Job Prestige by gender'),
-        dcc.Graph(figure=fig4,
-        style={
-            "display": "block",
-            "margin-left": "auto",
-            "margin-right": "auto",
-            }),
+        html.Div([
+            dcc.Graph(figure=fig4)
+        ], style=graphstyle),
         
         html.Div([
             html.H3('Job Prestige distribution by gender'),
-            dcc.Graph(figure=fig5a)
+            html.Div([
+                dcc.Graph(figure=fig5a)
+            ], style=graphstyle)
         ], style = {'width':'48%', 'float':'left'}),
         
         html.Div([
             html.H3('Income distribution by gender'),
-            dcc.Graph(figure=fig5b)
+            html.Div([
+                dcc.Graph(figure=fig5b)
+            ], style=graphstyle)
         ], style = {'width':'48%', 'float':'right'}),
         
         html.Br(style={'clear':'both'}),
         
         html.H3('Income distributions by job prestige and gender'),
-        dcc.Graph(figure=fig6,
-        style={
-            "display": "block",
-            "margin-left": "auto",
-            "margin-right": "auto",
-            })
+        html.Div([
+            dcc.Graph(figure=fig6)
+        ], style=graphstyle),
     ]
 )
 @app.callback(
