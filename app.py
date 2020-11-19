@@ -294,7 +294,7 @@ def make_figure(x, y):
     return fig3
 
 if __name__ == '__main__':
-    app.run_server(mode='inline', debug=True, port=8050, host = 'localhost')
+    app.run_server(debug=True)
     
 
 
