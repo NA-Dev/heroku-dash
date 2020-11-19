@@ -23,7 +23,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['./style.css']
 
 
 # For this lab, we will be working with the 2019 General Social Survey one last time.
