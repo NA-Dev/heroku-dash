@@ -130,7 +130,7 @@ fig4.update(layout=dict(title=dict(x=0.5)))
 
 
 markdown_text_4 = '''
-
+This scatterplot shows that jobs with lower prestige have women with higher earnings than men, but these earnings are generally low overall. Once we get to median earnings/prestige, men and women are more equally represented, but women receive lower salaries on average. In the high prestige/earnings area, the wage gap is at its highest and fewer women are present in this bracket.
 '''
 
 # ## Problem 5
@@ -152,9 +152,11 @@ fig5b = px.box(gss_data, x='job_prestige', y = 'sex', color = 'sex',
 fig5b.update_layout(showlegend=False)
 
 
+
+ 
 markdown_text_5 = '''
-This scatterplot shows that jobs with lower prestige have women with higher earnings than men, but these earnings are generally low overall. Once we get to median earnings/prestige, men and women are more equally represented, but women receive lower salaries on average. In the high prestige/earnings area, the wage gap is at its highest and fewer women are present in this bracket.
-'''
+The income boxplot again shows that while average salary is similar, there are more women earning salaries below $40k, and many more men earning salaries greater than $40k. In the prestige boxplot, we again see that women have a larger trail in the low prestige category than men, reflecting the fact that they are less often moved to higher level positions. The women who do move up, however, have very high job prestige which brings their average higher than for males despite the skew toward low prestige.
+''' 
 # ## Problem 6
 # Create a new dataframe that contains only `income`, `sex`, and `job_prestige`. Then create a new feature in this dataframe that breaks `job_prestige` into six categories with equally sized ranges. Finally, drop all rows with any missing values in this dataframe.
 # 
@@ -175,6 +177,7 @@ gss_sub = gss_sub.dropna()
 
 fig6 = px.box(gss_sub, x='sex', y='income', color='sex',
              facet_col='job_prestige_groups', facet_col_wrap=2,
+             category_orders={'job_prestige_groups': ['Lowest', 'Mid-High', 'Low', 'High', 'Low-Mid', 'Highest']},
             labels={'sex':'Gender', 'income':'Income'},
             color_discrete_map = {'Male':'blue', 'Female':'red'},
             height=900
@@ -186,7 +189,7 @@ fig6.for_each_annotation(lambda a: a.update(text=a.text.replace("job_prestige_gr
 
  
 markdown_text_6 = '''
-The income boxplot again shows that while average salary is similar, there are more women earning salaries below $40k, and many more men earning salaries greater than $40k. In the prestige boxplot, we again see that women have a larger trail in the low prestige category than men, reflecting the fact that they are less often moved to higher level positions.
+To see more granularity in income disparity, the above shows income by gender for each of sex job prestige levels. We can again see that at higher job prestige levels, males have higher average salary and a skew toward higher income.
 ''' 
 
 # ## Extra Credit (up to 10 bonus points)
