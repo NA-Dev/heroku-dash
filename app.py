@@ -260,7 +260,7 @@ app.layout = html.Div(
                          options=[{'label': questions[i], 'value': i} for i in questions.keys()],
                          value='male_breadwinner',
                          optionHeight=120)
-            html.small('* Changes take several seconds to recalculate, please be patient')
+            html.Small('* Changes take several seconds to recalculate, please be patient')
         
         ], style={'width': '30%', 'float': 'left'}),
         html.Div([
