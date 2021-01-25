@@ -259,7 +259,7 @@ app.layout = html.Div(
             dcc.Dropdown(id='x-axis',
                          options=[{'label': questions[i], 'value': i} for i in questions.keys()],
                          value='male_breadwinner',
-                         optionHeight=120)
+                         optionHeight=120),
             html.Small('* Changes take several seconds to recalculate, please be patient')
         
         ], style={'width': '30%', 'float': 'left'}),
