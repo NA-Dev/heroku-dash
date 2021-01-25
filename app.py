@@ -217,7 +217,7 @@ app.layout = html.Div(
         html.H3('Degree of agreement with gender role statements'),
         
         # user inputs
-        html.Div(id='main', [
+        html.Div([
             
             html.H4('Choose a feature to group by:'),
             
@@ -232,7 +232,7 @@ app.layout = html.Div(
                          value='male_breadwinner',
                          optionHeight=120)
         
-        ], style={'width': '30%', 'float': 'left'}),
+        ], id='main', style={'width': '30%', 'float': 'left'}),
         
         html.Div([
             html.H5(id='fig3title'),
