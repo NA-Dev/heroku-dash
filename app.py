@@ -232,7 +232,7 @@ app.layout = html.Div(
                          value='male_breadwinner',
                          optionHeight=120)
         
-        ], id='main', style={'width': '30%', 'float': 'left'}),
+        ], style={'width': '30%', 'float': 'left'}),
         
         html.Div([
             html.H5(id='fig3title'),
@@ -268,7 +268,7 @@ app.layout = html.Div(
         html.Div([
             dcc.Graph(figure=fig6)
         ], style=graphstyle),
-    ]
+    ], id='main'
 )
 @app.callback(
     Output(component_id='fig3title', component_property='children'),
