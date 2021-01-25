@@ -104,6 +104,10 @@ gss_grouped['Gender'] = gss_grouped['Gender'].map({'female': 'Female',
 
 fig2 = ff.create_table(gss_grouped)
 
+markdown_text_2 = '''
+Here we can see that while average education level for females is slightly higher, other metrics like socioeconomic status, job prestige, and especially income trend slightly lower than males. Though these differences in mean may not be statistically significant.
+'''
+
 
 # ## Problem 4
 # Create an interactive scatterplot with `job_prestige` on the x-axis and `income` on the y-axis. Color code the points by `sex` and make sure that the figure includes a legend for these colors. Also include two best-fit lines, one for men and one for women. Finally, include hover data that shows us the values of `education` and `socioeconomic_index` for any point the mouse hovers over. Write presentable labels for the x and y-axes, but don't bother with a title because we will be using a subtitle on the dashboard for this graphic. [3 points]
@@ -125,6 +129,10 @@ fig4 = px.scatter(gss_data, x='job_prestige', y='income',
 fig4.update(layout=dict(title=dict(x=0.5)))
 
 
+markdown_text_4 = '''
+
+'''
+
 # ## Problem 5
 # Create two interactive box plots: one that shows the distribution of `income` for men and for women, and one that shows the distribution of `job_prestige` for men and for women. Write presentable labels for the axis that contains `income` or `job_prestige` and remove the label for `sex`. Also, turn off the legend. Don't bother with titles because we will be using subtitles on the dashboard for these graphics. [3 points]
 
@@ -144,6 +152,9 @@ fig5b = px.box(gss_data, x='job_prestige', y = 'sex', color = 'sex',
 fig5b.update_layout(showlegend=False)
 
 
+markdown_text_5 = '''
+This scatterplot shows that jobs with lower prestige have women with higher earnings than men, but these earnings are generally low overall. Once we get to median earnings/prestige, men and women are more equally represented, but women receive lower salaries on average. In the high prestige/earnings area, the wage gap is at its highest and fewer women are present in this bracket.
+'''
 # ## Problem 6
 # Create a new dataframe that contains only `income`, `sex`, and `job_prestige`. Then create a new feature in this dataframe that breaks `job_prestige` into six categories with equally sized ranges. Finally, drop all rows with any missing values in this dataframe.
 # 
@@ -173,7 +184,11 @@ fig6.update(layout=dict(title=dict(x=0.5)))
 fig6.update_layout(showlegend=True)
 fig6.for_each_annotation(lambda a: a.update(text=a.text.replace("job_prestige_groups=", "")))
 
-  
+ 
+markdown_text_6 = '''
+The income boxplot again shows that while average salary is similar, there are more women earning salaries below $40k, and many more men earning salaries greater than $40k. In the prestige boxplot, we again see that women have a larger trail in the low prestige category than men, reflecting the fact that they are less often moved to higher level positions.
+''' 
+
 # ## Extra Credit (up to 10 bonus points)
 # Dashboards are all about good design, functionality, and accessability. For this extra credit problem, create another version of the dashboard you built for problem 7, but take extra steps to improve the appearance of the dashboard, add user-inputs, and host it on the internet with its own URL.
 # 
@@ -194,13 +209,19 @@ graphstyle = {
             }
 
 questions = {
-    'satjob': 'On the whole, how satisfied are you with the work you do?',
-    'relationship': 'A working mother can establish just as warm and secure a relationship with her children as a mother who does not work.',
-    'male_breadwinner': 'It is much better for everyone involved if the man is the achiever outside the home and the woman takes care of the home and family.',
     'men_bettersuited': 'Most men are better suited emotionally for politics than are most women.',
+    'male_breadwinner': 'It is much better for everyone involved if the man is the achiever outside the home and the woman takes care of the home and family.',
+    'relationship': 'A working mother can establish just as warm and secure a relationship with her children as a mother who does not work.',
     'child_suffer': 'A preschool child is likely to suffer if his or her mother works.',
     'men_overwork': 'Family life often suffers because men concentrate too much on their work.'
 }
+
+
+markdown_text_3 = '''
+Exploring which groups tend to agree and disagree with traditional gender role statements, we can see that older males are the most traditional, but in general the majority are disagreeing with the notion that a mother should not work.
+'''
+
+### Create HTML markup
 
 app = dash.Dash(__name__)
 
@@ -208,21 +229,26 @@ server = app.server
 
 app.layout = html.Div(
     [
+        # Header
         html.H1('Understanding the Gender Wage Gap'),
         dcc.Markdown(children = markdown_text),
+        
+        # Problem 2
         html.H3('Comparing mean income, occupational prestige, and socioeconomic index by gender'),
         html.Div([
             dcc.Graph(figure=fig2)
         ], style=graphstyle),
-        html.H3('Degree of agreement with gender role statements'),
+        dcc.Markdown(children = markdown_text_2),
         
-        # user inputs
+        
+        # Problem 4: user inputs
+        html.H3('Degree of agreement with gender role statements'),
         html.Div([
             
             html.H4('Choose a feature to group by:'),
             
             dcc.Dropdown(id='y-axis',
-                         options=[{'label': i, 'value': i} for i in ['sex', 'region', 'education']],
+                         options=[{'label': i, 'value': i} for i in ['sex', 'age', 'region', 'education', 'income']],
                          value='sex'),
             
             html.H4('Choose a statement:'),
@@ -231,22 +257,24 @@ app.layout = html.Div(
                          options=[{'label': questions[i], 'value': i} for i in questions.keys()],
                          value='male_breadwinner',
                          optionHeight=120)
+            html.small('* Changes take several seconds to recalculate, please be patient')
         
         ], style={'width': '30%', 'float': 'left'}),
-        
         html.Div([
             html.H5(id='fig3title'),
             html.Div([
                 dcc.Graph(id='fig3')
             ], style=graphstyle),
         ], style={'width': '65%', 'float': 'right'}),
-        
         html.Br(style={'clear':'both'}),
+        dcc.Markdown(children = markdown_text_3),
         
+        # Problem 4
         html.H3('Trends in Income versus Job Prestige by gender'),
         html.Div([
             dcc.Graph(figure=fig4)
         ], style=graphstyle),
+        dcc.Markdown(children = markdown_text_4),
         
         html.Div([
             html.H3('Job Prestige distribution by gender'),
@@ -261,13 +289,15 @@ app.layout = html.Div(
                 dcc.Graph(figure=fig5b)
             ], style=graphstyle)
         ], style = {'width':'48%', 'float':'right'}),
-        
         html.Br(style={'clear':'both'}),
+        dcc.Markdown(children = markdown_text_5),
         
+        # Problem 6
         html.H3('Income distributions by job prestige and gender'),
         html.Div([
             dcc.Graph(figure=fig6)
         ], style=graphstyle),
+        dcc.Markdown(children = markdown_text_6),
     ], id='main'
 )
 @app.callback(
