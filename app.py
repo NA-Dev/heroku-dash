@@ -86,7 +86,7 @@ markdown_text = '''
 # In[5]:
 
 
-gss_grouped = gss_clean.groupby("sex").agg({"income": "mean", 
+gss_grouped = gss.groupby("sex").agg({"income": "mean", 
 "job_prestige": "mean", 
 "socioeconomic_index": "mean", 
 "education": "mean"}).round(2) 
@@ -111,7 +111,7 @@ fig2 = ff.create_table(gss_grouped)
 # In[8]:
 
 
-gss_data = gss_clean.copy()
+gss_data = gss.copy()
 gss_data['sex'] = gss_data['sex'].map({'female': 'Female',
                                        'male':'Male'})
 fig4 = px.scatter(gss_data, x='job_prestige', y='income', 
@@ -282,7 +282,7 @@ def update_output_title(input_value):
                    Input(component_id='y-axis',component_property='value')])
 
 def make_figure(x, y):    
-    data = gss_clean.dropna()
+    data = gss.dropna()
     xtab = pd.crosstab(data[y], data[x]).reset_index()
     xtab = pd.melt(xtab, id_vars = y, value_vars = data[x].unique())
     
