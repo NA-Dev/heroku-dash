@@ -217,7 +217,7 @@ app.layout = html.Div(
         html.H3('Degree of agreement with gender role statements'),
         
         # user inputs
-        html.Div([
+        html.Div(id='main', [
             
             html.H4('Choose a feature to group by:'),
             
