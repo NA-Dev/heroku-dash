@@ -31,39 +31,13 @@ from dash.dependencies import Input, Output
 # In[2]:
 
 
-gss = pd.read_csv("https://github.com/jkropko/DS-6001/raw/master/localdata/gss2018.csv",
+gss = pd.read_csv("gss.csv",
                  encoding='cp1252', na_values=['IAP','IAP,DK,NA,uncodeable', 'NOT SURE',
                                                'DK', 'IAP, DK, NA, uncodeable', '.a', "CAN'T CHOOSE"])
 
 
-# Here is code that cleans the data and gets it ready to be used for data visualizations:
 
-# In[3]:
-
-
-mycols = ['id', 'wtss', 'sex', 'educ', 'region', 'age', 'coninc',
-          'prestg10', 'mapres10', 'papres10', 'sei10', 'satjob',
-          'fechld', 'fefam', 'fepol', 'fepresch', 'meovrwrk'] 
-gss_clean = gss[mycols]
-gss_clean = gss_clean.rename({'wtss':'weight', 
-                              'educ':'education', 
-                              'coninc':'income', 
-                              'prestg10':'job_prestige',
-                              'mapres10':'mother_job_prestige', 
-                              'papres10':'father_job_prestige', 
-                              'sei10':'socioeconomic_index', 
-                              'fechld':'relationship', 
-                              'fefam':'male_breadwinner', 
-                              'fehire':'hire_women', 
-                              'fejobaff':'preference_hire_women', 
-                              'fepol':'men_bettersuited', 
-                              'fepresch':'child_suffer',
-                              'meovrwrk':'men_overwork'},axis=1)
-gss_clean.age = gss_clean.age.replace({'89 or older':'89'})
-gss_clean.age = gss_clean.age.astype('float')
-
-
-# The `gss_clean` dataframe now contains the following features:
+# The `gss` dataframe contains the following features:
 # 
 # * `id` - a numeric unique ID for each person who responded to the survey
 # * `weight` - survey sample weights
@@ -322,8 +296,3 @@ def make_figure(x, y):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-    
-
-
-
-
